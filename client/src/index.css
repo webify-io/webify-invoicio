@@ -1,0 +1,60 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — deep navy + warm amber accent */
+  --color-brand-950: #0a0f1e;
+  --color-brand-900: #0f172a;
+  --color-brand-800: #1e2a45;
+  --color-brand-700: #2d3f63;
+  --color-brand-600: #3d5480;
+  --color-brand-500: #4e6a9e;
+  --color-brand-400: #6b8cbe;
+  --color-brand-300: #93aed4;
+  --color-brand-200: #bfd0e8;
+  --color-brand-100: #e3ecf5;
+  --color-brand-50:  #f0f5fb;
+
+  --color-accent-500: #f59e0b;
+  --color-accent-400: #fbbf24;
+  --color-accent-300: #fcd34d;
+  --color-accent-600: #d97706;
+
+  --color-success-500: #10b981;
+  --color-success-100: #d1fae5;
+  --color-warning-500: #f59e0b;
+  --color-warning-100: #fef3c7;
+  --color-danger-500:  #ef4444;
+  --color-danger-100:  #fee2e2;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing & radii */
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 4px 16px 0 rgb(0 0 0 / 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-brand-50);
+  color: var(--color-brand-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Status badge utilities */
+.badge-draft     { @apply bg-gray-100 text-gray-600; }
+.badge-sent      { @apply bg-blue-100 text-blue-700; }
+.badge-viewed    { @apply bg-purple-100 text-purple-700; }
+.badge-paid      { @apply bg-success-100 text-success-500; }
+.badge-overdue   { @apply bg-danger-100 text-danger-500; }
+.badge-cancelled { @apply bg-gray-100 text-gray-400; }
