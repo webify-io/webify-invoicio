@@ -17,7 +17,7 @@ A clean, full-stack invoicing application for freelancers and small businesses.
 
 ## Project Structure
 
-\`\`\`
+```
 invoicio/
 ├── client/
 │   └── src/
@@ -49,7 +49,7 @@ invoicio/
     │   └── errorHandler.ts
     ├── routes/                     # Thin routers — wiring only
     └── server.ts
-\`\`\`
+```
 
 ---
 
@@ -57,38 +57,38 @@ invoicio/
 
 ### 1. Install
 
-\`\`\`bash
+```bash
 cd server && npm install
 cd ../client && npm install
-\`\`\`
+```
 
 ### 2. Configure environment
 
-\`\`\`bash
+```bash
 cp server/.env.example server/.env    # fill in DATABASE_URL, JWT_SECRET
 cp client/.env.example client/.env   # fill in VITE_BACKEND_URL
-\`\`\`
+```
 
 > **DATABASE_URL must include the database name before `?`:**
 > `postgresql://user:pass@host/invoicio-dev?sslmode=require`
 
 ### 3. Database setup
 
-\`\`\`bash
+```bash
 cd server
 npm run db:generate
 npm run db:migrate
-\`\`\`
+```
 
 ### 4. Run
 
-\`\`\`bash
+```bash
 # Terminal 1
 cd server && npm run server    # → http://localhost:4000
 
 # Terminal 2
 cd client && npm run dev       # → http://localhost:5173
-\`\`\`
+```
 
 ---
 

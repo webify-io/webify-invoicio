@@ -38,6 +38,9 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+// Root endpoint to verify server is running
+app.get('/', (req, res) => res.send("API is Working"));
+
 app.use('/api/auth',      authRouter)
 app.use('/api/clients',   auth, clientsRouter)
 app.use('/api/invoices',  auth, invoicesRouter)
