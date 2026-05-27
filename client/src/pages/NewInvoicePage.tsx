@@ -227,7 +227,7 @@ export default function NewInvoicePage() {
 
         {createInvoice.error && (
           <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
-            {(createInvoice.error as any)?.response?.data?.message ?? 'Failed to create invoice'}
+            {(createInvoice.error as any)?.message ?? 'Failed to create invoice'}
           </p>
         )}
 

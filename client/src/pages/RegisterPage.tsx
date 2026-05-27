@@ -48,7 +48,7 @@ export default function RegisterPage() {
 
           {register_.error && (
             <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
-              {(register_.error as any)?.response?.data?.message ?? 'Registration failed'}
+              {(register_.error as any)?.message ?? 'Registration failed'}
             </p>
           )}
 

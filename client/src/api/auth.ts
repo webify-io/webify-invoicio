@@ -12,9 +12,9 @@ export function useLogin() {
   return useMutation({
     mutationFn: (data: LoginInput) => authService.login(data),
     onSuccess: (res: any) => {
+      // axiosClient unwraps response.data, so res is the full response body: { data: { token, user } }
       const { token, user } = res.data
-      localStorage.setItem('token', token)
-      setAuth(token, user)
+      setAuth(token, user) // setAuth handles localStorage.setItem internally — no need to call it twice
       navigate('/')
     },
   })
@@ -27,7 +27,6 @@ export function useRegister() {
     mutationFn: (data: RegisterInput) => authService.register(data),
     onSuccess: (res: any) => {
       const { token, user } = res.data
-      localStorage.setItem('token', token)
       setAuth(token, user)
       navigate('/')
     },

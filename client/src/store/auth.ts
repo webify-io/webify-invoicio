@@ -4,7 +4,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-interface AuthUser {
+export interface AuthUser {
   id: string
   email: string
   name: string
@@ -32,6 +32,6 @@ export const useAuthStore = create<AuthState>()(
         set({ token: null, user: null })
       },
     }),
-    { name: 'invoicio-auth' },
+    { name: 'invoicio-auth' }, // matches the key axiosClient clears on 401
   ),
 )
