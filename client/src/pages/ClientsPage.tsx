@@ -61,7 +61,7 @@ export default function ClientsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search clients…"
-              className="w-full pl-8 pr-3 py-2 text-sm bg-gray-50 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f172a]/10"
+              className="w-full pl-8 pr-3 py-2 text-sm bg-gray-50 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-900/10"
             />
           </div>
         </div>
@@ -87,11 +87,11 @@ export default function ClientsPage() {
                 onClick={() => navigate(`/clients/${client.id}`)}
                 className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-50/60 transition-colors text-left group"
               >
-                <div className="w-10 h-10 rounded-full bg-[#0f172a] flex items-center justify-center text-white text-sm font-bold shrink-0">
+                <div className="w-10 h-10 rounded-full bg-brand-900 flex items-center justify-center text-white text-sm font-bold shrink-0">
                   {getInitials(client.name)}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#0f172a]">{client.name}</p>
+                  <p className="text-sm font-semibold text-brand-900">{client.name}</p>
                   <p className="text-xs text-slate-400 truncate">
                     {client.company ? `${client.company} · ` : ''}{client.email}
                   </p>
@@ -101,7 +101,7 @@ export default function ClientsPage() {
                     <p className="text-xs text-slate-400">{client.invoiceCount} invoice{client.invoiceCount !== 1 ? 's' : ''}</p>
                   )}
                   {client.totalBilled !== undefined && client.totalBilled > 0 && (
-                    <p className="text-sm font-semibold text-[#0f172a]">{formatCurrency(client.totalBilled)}</p>
+                    <p className="text-sm font-semibold text-brand-900">{formatCurrency(client.totalBilled)}</p>
                   )}
                 </div>
                 <span className="text-slate-300 group-hover:text-slate-400 text-lg">›</span>

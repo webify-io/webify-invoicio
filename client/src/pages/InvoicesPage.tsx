@@ -57,7 +57,7 @@ export default function InvoicesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search invoices or clients…"
-              className="w-full pl-8 pr-3 py-2 text-sm bg-gray-50 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f172a]/10 focus:border-[#0f172a]/30"
+              className="w-full pl-8 pr-3 py-2 text-sm bg-gray-50 border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-900/10 focus:border-brand-900/30"
             />
           </div>
 
@@ -69,7 +69,7 @@ export default function InvoicesPage() {
                 onClick={() => setSearchParams(f.value ? { status: f.value } : {})}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                   status === f.value
-                    ? 'bg-white text-[#0f172a] shadow-sm'
+                    ? 'bg-white text-brand-900 shadow-sm'
                     : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
@@ -114,10 +114,10 @@ export default function InvoicesPage() {
                   onClick={() => navigate(`/invoices/${inv.id}`)}
                 >
                   <td className="px-5 py-3.5">
-                    <span className="text-sm font-mono font-medium text-[#0f172a]">{inv.number}</span>
+                    <span className="text-sm font-mono font-medium text-brand-900">{inv.number}</span>
                   </td>
                   <td className="px-5 py-3.5">
-                    <p className="text-sm font-medium text-[#0f172a]">{inv.client?.name}</p>
+                    <p className="text-sm font-medium text-brand-900">{inv.client?.name}</p>
                     {inv.client?.company && (
                       <p className="text-xs text-slate-400">{inv.client.company}</p>
                     )}
@@ -128,7 +128,7 @@ export default function InvoicesPage() {
                     <StatusBadge status={inv.status as InvoiceStatus} />
                   </td>
                   <td className="px-5 py-3.5">
-                    <span className="text-sm font-semibold text-[#0f172a]">
+                    <span className="text-sm font-semibold text-brand-900">
                       {formatCurrency(inv.total, inv.currency)}
                     </span>
                   </td>

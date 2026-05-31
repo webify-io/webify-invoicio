@@ -21,10 +21,10 @@ export default function DashboardPage() {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
 
   return (
-    <div className="p-8">
-      <div className="flex items-start justify-between mb-8">
+    <div className="p-4 sm:p-8">
+      <div className="flex flex-col sm:flex-row items-start justify-between mb-6 sm:mb-8 gap-4">
         <div>
-          <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-3xl font-bold text-[#0f172a]">
+          <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-3xl font-bold text-brand-900">
             {greeting}, {user?.name?.split(' ')[0]}
           </h1>
           <p className="text-sm text-slate-500 mt-1">Here's what's happening with your invoices</p>
@@ -108,7 +108,7 @@ export default function DashboardPage() {
                 onClick={() => navigate(to)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all text-left ${
                   accent
-                    ? 'bg-[#0f172a] text-white hover:bg-[#1e2a45]'
+                    ? 'bg-brand-900 text-white hover:bg-brand-800'
                     : 'text-slate-600 hover:bg-slate-50 border border-gray-100'
                 }`}
               >
@@ -125,7 +125,7 @@ export default function DashboardPage() {
         <Card className="mt-6">
           <div className="px-6 py-4 border-b border-gray-50 flex items-center justify-between">
             <h2 className="text-sm font-semibold text-slate-700">Recent Invoices</h2>
-            <button onClick={() => navigate('/invoices')} className="text-xs text-slate-400 hover:text-[#0f172a] transition-colors">
+            <button onClick={() => navigate('/invoices')} className="text-xs text-slate-400 hover:text-brand-900 transition-colors">
               View all →
             </button>
           </div>
@@ -140,13 +140,13 @@ export default function DashboardPage() {
                   {inv.number?.slice(-2)}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-[#0f172a] truncate">
+                  <p className="text-sm font-medium text-brand-900 truncate">
                     {inv.client?.name ?? 'Unknown client'}
                   </p>
                   <p className="text-xs text-slate-400">{inv.number} · Due {formatDate(inv.dueDate)}</p>
                 </div>
                 <StatusBadge status={inv.status} />
-                <span className="text-sm font-semibold text-[#0f172a] ml-2">
+                <span className="text-sm font-semibold text-brand-900 ml-2">
                   {formatCurrency(inv.total, inv.currency)}
                 </span>
               </button>

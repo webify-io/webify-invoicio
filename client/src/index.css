@@ -58,3 +58,35 @@ body {
 .badge-paid      { @apply bg-success-100 text-success-500; }
 .badge-overdue   { @apply bg-danger-100 text-danger-500; }
 .badge-cancelled { @apply bg-gray-100 text-gray-400; }
+
+/* Print styles — only the invoice content is shown */
+@media print {
+  body {
+    background: white !important;
+    font-size: 12pt;
+  }
+
+  /* Hide everything by default */
+  body > * {
+    display: none !important;
+  }
+
+  /* Show only the React root */
+  body > #root {
+    display: block !important;
+  }
+
+  /* Hide the sidebar + mobile header inside the root */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Show the print-only invoice block */
+  .print\:block {
+    display: block !important;
+  }
+
+  @page {
+    margin: 20mm;
+  }
+}

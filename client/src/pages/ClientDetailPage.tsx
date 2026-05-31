@@ -55,7 +55,7 @@ export default function ClientDetailPage() {
   const totalPaid = allInvoices.filter((i) => i.status === 'paid').reduce((s, i) => s + Number(i.total), 0)
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-4 sm:p-8 max-w-4xl">
       <button onClick={() => navigate('/clients')} className="flex items-center gap-1 text-sm text-slate-400 hover:text-slate-600 transition-colors mb-6">
         <ArrowLeft size={14} /> Back to clients
       </button>
@@ -64,11 +64,11 @@ export default function ClientDetailPage() {
       <Card className="p-6 mb-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#0f172a] flex items-center justify-center text-white text-lg font-bold">
+            <div className="w-14 h-14 rounded-2xl bg-brand-900 flex items-center justify-center text-white text-lg font-bold">
               {getInitials(client.name)}
             </div>
             <div>
-              <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-2xl font-bold text-[#0f172a]">
+              <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-2xl font-bold text-brand-900">
                 {client.name}
               </h1>
               <div className="flex items-center gap-4 mt-1">
@@ -115,7 +115,7 @@ export default function ClientDetailPage() {
           ].map(({ label, value }) => (
             <div key={label}>
               <p className="text-xs text-slate-400 uppercase tracking-wide">{label}</p>
-              <p className="text-lg font-bold text-[#0f172a] mt-0.5" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <p className="text-lg font-bold text-brand-900 mt-0.5" style={{ fontFamily: 'Playfair Display, serif' }}>
                 {value}
               </p>
             </div>
@@ -161,7 +161,7 @@ export default function ClientDetailPage() {
                   <td className="px-5 py-3 text-sm text-slate-500">{formatDate(inv.issueDate)}</td>
                   <td className="px-5 py-3 text-sm text-slate-500">{formatDate(inv.dueDate)}</td>
                   <td className="px-5 py-3"><StatusBadge status={inv.status as InvoiceStatus} /></td>
-                  <td className="px-5 py-3 text-sm font-semibold text-[#0f172a]">
+                  <td className="px-5 py-3 text-sm font-semibold text-brand-900">
                     {formatCurrency(inv.total, inv.currency as CurrencyCode)}
                   </td>
                 </tr>

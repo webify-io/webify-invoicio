@@ -41,7 +41,7 @@ export const users = pgTable('users', {
   businessLogo: text('business_logo'),
   address: text('address'),
   taxNumber: text('tax_number'),
-  currency: currencyEnum('currency').notNull().default('USD'),
+  currency: currencyEnum('currency').notNull().default('ZAR'),
   emailVerified: boolean('email_verified').notNull().default(false),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
@@ -76,7 +76,7 @@ export const invoices = pgTable('invoices', {
   status: invoiceStatusEnum('status').notNull().default('draft'),
   issueDate: text('issue_date').notNull(),     // ISO date string
   dueDate: text('due_date').notNull(),
-  currency: currencyEnum('currency').notNull().default('USD'),
+  currency: currencyEnum('currency').notNull().default('ZAR'),
   paymentTerm: paymentTermEnum('payment_term').notNull().default('net_30'),
   // Line items stored as JSONB for flexibility
   lineItems: jsonb('line_items').notNull().$type<{

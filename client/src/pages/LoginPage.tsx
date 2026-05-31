@@ -22,7 +22,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left panel */}
-      <div className="hidden lg:flex w-1/2 bg-[#0f172a] flex-col justify-between p-12 relative overflow-hidden">
+      <div className="hidden lg:flex w-1/2 bg-brand-900 flex-col justify-between p-12 relative overflow-hidden">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10"
           style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 0)', backgroundSize: '32px 32px' }}
@@ -31,7 +31,7 @@ export default function LoginPage() {
         <div className="relative z-10">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-amber-400 flex items-center justify-center">
-              <Zap size={18} className="text-[#0f172a]" fill="currentColor" />
+              <Zap size={18} className="text-brand-900" fill="currentColor" />
             </div>
             <span style={{ fontFamily: 'Playfair Display, serif' }} className="text-2xl font-bold text-white">
               Invoicio
@@ -60,16 +60,16 @@ export default function LoginPage() {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-[#f0f5fb]">
+      <div className="flex-1 flex items-center justify-center p-8 bg-brand-50">
         <div className="w-full max-w-sm">
           <div className="lg:hidden flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 rounded-lg bg-[#0f172a] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center">
               <Zap size={14} className="text-amber-400" fill="currentColor" />
             </div>
-            <span style={{ fontFamily: 'Playfair Display, serif' }} className="text-xl font-bold text-[#0f172a]">Invoicio</span>
+            <span style={{ fontFamily: 'Playfair Display, serif' }} className="text-xl font-bold text-brand-900">Invoicio</span>
           </div>
 
-          <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-3xl font-bold text-[#0f172a] mb-2">
+          <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-3xl font-bold text-brand-900 mb-2">
             Welcome back
           </h1>
           <p className="text-slate-500 text-sm mb-8">Sign in to your account</p>
@@ -93,7 +93,7 @@ export default function LoginPage() {
 
           <p className="text-sm text-slate-500 mt-6 text-center">
             Don't have an account?{' '}
-            <Link to="/register" className="text-[#0f172a] font-medium hover:underline">
+            <Link to="/register" className="text-brand-900 font-medium hover:underline">
               Create one
             </Link>
           </p>

@@ -97,3 +97,78 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
     next(err)
   }
 }
+
+// ── Update profile / business / invoice defaults ───────────────────────────────
+
+const updateProfileSchema = z.object({
+  name:               z.string().min(1).optional(),
+  businessName:       z.string().optional(),
+  address:            z.string().optional(),
+  taxNumber:          z.string().optional(),
+  currency:           z.enum(['USD','EUR','GBP','ZAR','AUD','CAD']).optional(),
+  defaultPaymentTerm: z.enum(['due_on_receipt','net_7','net_15','net_30','net_60','custom']).optional(),
+  invoicePrefix:      z.string().optional(),
+  defaultNotes:       z.string().optional(),
+})
+
+export async function updateProfile(req: Request & { userId?: string }, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const userId = req.userId!
+    const input  = updateProfileSchema.parse(req.body)
+
+    const [updated] = await db
+      .update(users)
+      .set({
+        ...(input.name         !== undefined && { name: input.name }),
+        ...(input.businessName !== undefined && { businessName: input.businessName }),
+        ...(input.address      !== undefined && { address: input.address }),
+        ...(input.taxNumber    !== undefined && { taxNumber: input.taxNumber }),
+        ...(input.currency     !== undefined && { currency: input.currency }),
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId))
+      .returning()
+
+    res.json({
+      data: {
+        id:           updated.id,
+        email:        updated.email,
+        name:         updated.name,
+        businessName: updated.businessName,
+        address:      updated.address,
+        taxNumber:    updated.taxNumber,
+        currency:     updated.currency,
+      },
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// ── Change password ────────────────────────────────────────────────────────────
+
+const changePasswordSchema = z.object({
+  currentPassword: z.string(),
+  newPassword:     z.string().min(8),
+})
+
+export async function changePassword(req: Request & { userId?: string }, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const userId = req.userId!
+    const input  = changePasswordSchema.parse(req.body)
+
+    const user = await db.query.users.findFirst({ where: eq(users.id, userId) })
+    if (!user) throw createError('User not found', 404, 'NOT_FOUND')
+
+    if (!(await verifyPassword(input.currentPassword, user.passwordHash))) {
+      throw createError('Current password is incorrect', 400, 'INVALID_PASSWORD')
+    }
+
+    const newHash = await hashPassword(input.newPassword)
+    await db.update(users).set({ passwordHash: newHash, updatedAt: new Date() }).where(eq(users.id, userId))
+
+    res.json({ data: { message: 'Password updated successfully' } })
+  } catch (err) {
+    next(err)
+  }
+}

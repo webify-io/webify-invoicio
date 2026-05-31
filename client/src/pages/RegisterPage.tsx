@@ -22,16 +22,16 @@ export default function RegisterPage() {
   })
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-8 bg-[#f0f5fb]">
+    <div className="min-h-screen flex items-center justify-center p-8 bg-brand-50">
       <div className="w-full max-w-sm">
         <div className="flex items-center gap-2 mb-8">
-          <div className="w-8 h-8 rounded-lg bg-[#0f172a] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center">
             <Zap size={14} className="text-amber-400" fill="currentColor" />
           </div>
-          <span style={{ fontFamily: 'Playfair Display, serif' }} className="text-xl font-bold text-[#0f172a]">Invoicio</span>
+          <span style={{ fontFamily: 'Playfair Display, serif' }} className="text-xl font-bold text-brand-900">Invoicio</span>
         </div>
 
-        <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-3xl font-bold text-[#0f172a] mb-2">
+        <h1 style={{ fontFamily: 'Playfair Display, serif' }} className="text-3xl font-bold text-brand-900 mb-2">
           Create account
         </h1>
         <p className="text-slate-500 text-sm mb-8">Start sending professional invoices today</p>
@@ -60,7 +60,7 @@ export default function RegisterPage() {
 
         <p className="text-sm text-slate-500 mt-6 text-center">
           Already have an account?{' '}
-          <Link to="/login" className="text-[#0f172a] font-medium hover:underline">
+          <Link to="/login" className="text-brand-900 font-medium hover:underline">
             Sign in
           </Link>
         </p>

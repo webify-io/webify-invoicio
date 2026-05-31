@@ -79,7 +79,7 @@ export default function NewInvoicePage() {
   }
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-4 sm:p-8 max-w-4xl">
       <div className="mb-6">
         <button onClick={() => navigate('/invoices')} className="flex items-center gap-1 text-sm text-slate-400 hover:text-slate-600 transition-colors mb-4">
           <ArrowLeft size={14} /> Back to invoices
@@ -194,7 +194,7 @@ export default function NewInvoicePage() {
             <button
               type="button"
               onClick={() => append({ description: '', quantity: 1, unitPrice: 0, taxRate: 0, discount: 0 })}
-              className="flex items-center gap-2 text-sm text-slate-500 hover:text-[#0f172a] transition-colors mt-2"
+              className="flex items-center gap-2 text-sm text-slate-500 hover:text-brand-900 transition-colors mt-2"
             >
               <Plus size={14} /> Add line item
             </button>
@@ -207,7 +207,7 @@ export default function NewInvoicePage() {
                 <span>Subtotal</span>
                 <span>{formatCurrency(subtotal, currency)}</span>
               </div>
-              <div className="flex justify-between font-semibold text-[#0f172a] border-t border-gray-100 pt-2">
+              <div className="flex justify-between font-semibold text-brand-900 border-t border-gray-100 pt-2">
                 <span>Total</span>
                 <span style={{ fontFamily: 'Playfair Display, serif' }} className="text-lg">
                   {formatCurrency(subtotal, currency)}

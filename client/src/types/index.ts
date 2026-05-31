@@ -22,8 +22,15 @@ export interface User {
   createdAt:     string
 }
 
-// Alias used by the auth store — same shape, named for clarity at the store layer
-export type AuthUser = Pick<User, 'id' | 'email' | 'name' | 'businessName'>
+// Alias used by the auth store — includes all user-editable fields
+export type AuthUser = Pick<User, 'id' | 'email' | 'name' | 'businessName'> & {
+  address?: string
+  taxNumber?: string
+  currency?: CurrencyCode
+  defaultPaymentTerm?: PaymentTerm
+  invoicePrefix?: string
+  defaultNotes?: string
+}
 
 export interface Client {
   id:           string
