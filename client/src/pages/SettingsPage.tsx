@@ -71,9 +71,9 @@ function BusinessSection() {
   const { register, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
       businessName: user?.businessName ?? '',
-      taxNumber:    (user as { taxNumber?: string })?.taxNumber ?? '',
-      address:      (user as { address?: string })?.address ?? '',
-      currency:     ((user as { currency?: string })?.currency ?? 'ZAR') as CurrencyCode,
+      taxNumber:    user?.taxNumber ?? '',
+      address:      user?.address ?? '',
+      currency:     (user?.currency ?? 'ZAR') as CurrencyCode,
     },
   })
 
@@ -132,9 +132,9 @@ function InvoiceDefaultsSection() {
 
   const { register, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
-      defaultPaymentTerm: ((user as { defaultPaymentTerm?: string })?.defaultPaymentTerm ?? 'net_30') as PaymentTerm,
-      invoicePrefix:      (user as { invoicePrefix?: string })?.invoicePrefix ?? 'INV',
-      defaultNotes:       (user as { defaultNotes?: string })?.defaultNotes ?? '',
+      defaultPaymentTerm: (user?.defaultPaymentTerm ?? 'net_30') as PaymentTerm,
+      invoicePrefix:      user?.invoicePrefix ?? 'INV',
+      defaultNotes:       user?.defaultNotes ?? '',
     },
   })
 

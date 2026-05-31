@@ -7,8 +7,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatCurrency(amount: number | string, currency: CurrencyCode = 'USD'): string {
-  return new Intl.NumberFormat('en-US', {
+const CURRENCY_LOCALE: Record<CurrencyCode, string> = {
+  ZAR: 'en-ZA',
+  USD: 'en-US',
+  EUR: 'de-DE',
+  GBP: 'en-GB',
+  AUD: 'en-AU',
+  CAD: 'en-CA',
+}
+
+export function formatCurrency(amount: number | string, currency: CurrencyCode = 'ZAR'): string {
+  const locale = CURRENCY_LOCALE[currency] ?? 'en-ZA'
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
     minimumFractionDigits: 2,

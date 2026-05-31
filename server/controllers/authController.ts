@@ -90,7 +90,18 @@ export async function login(req: Request, res: Response, next: NextFunction): Pr
     res.json({
       data: {
         token,
-        user: { id: user.id, email: user.email, name: user.name, businessName: user.businessName },
+        user: {
+          id:                 user.id,
+          email:              user.email,
+          name:               user.name,
+          businessName:       user.businessName,
+          address:            user.address,
+          taxNumber:          user.taxNumber,
+          currency:           user.currency,
+          defaultPaymentTerm: user.defaultPaymentTerm,
+          invoicePrefix:      user.invoicePrefix,
+          defaultNotes:       user.defaultNotes,
+        },
       },
     })
   } catch (err) {
@@ -119,11 +130,14 @@ export async function updateProfile(req: Request & { userId?: string }, res: Res
     const [updated] = await db
       .update(users)
       .set({
-        ...(input.name         !== undefined && { name: input.name }),
-        ...(input.businessName !== undefined && { businessName: input.businessName }),
-        ...(input.address      !== undefined && { address: input.address }),
-        ...(input.taxNumber    !== undefined && { taxNumber: input.taxNumber }),
-        ...(input.currency     !== undefined && { currency: input.currency }),
+        ...(input.name               !== undefined && { name: input.name }),
+        ...(input.businessName       !== undefined && { businessName: input.businessName }),
+        ...(input.address            !== undefined && { address: input.address }),
+        ...(input.taxNumber          !== undefined && { taxNumber: input.taxNumber }),
+        ...(input.currency           !== undefined && { currency: input.currency }),
+        ...(input.defaultPaymentTerm !== undefined && { defaultPaymentTerm: input.defaultPaymentTerm }),
+        ...(input.invoicePrefix      !== undefined && { invoicePrefix: input.invoicePrefix }),
+        ...(input.defaultNotes       !== undefined && { defaultNotes: input.defaultNotes }),
         updatedAt: new Date(),
       })
       .where(eq(users.id, userId))
@@ -131,13 +145,16 @@ export async function updateProfile(req: Request & { userId?: string }, res: Res
 
     res.json({
       data: {
-        id:           updated.id,
-        email:        updated.email,
-        name:         updated.name,
-        businessName: updated.businessName,
-        address:      updated.address,
-        taxNumber:    updated.taxNumber,
-        currency:     updated.currency,
+        id:                 updated.id,
+        email:              updated.email,
+        name:               updated.name,
+        businessName:       updated.businessName,
+        address:            updated.address,
+        taxNumber:          updated.taxNumber,
+        currency:           updated.currency,
+        defaultPaymentTerm: updated.defaultPaymentTerm,
+        invoicePrefix:      updated.invoicePrefix,
+        defaultNotes:       updated.defaultNotes,
       },
     })
   } catch (err) {

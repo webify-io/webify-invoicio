@@ -5,6 +5,7 @@ import { useInvoice, useSendInvoice, useDeleteInvoice, useRecordPayment } from '
 import { Button, Card, Modal, Input, Select } from '@/components/ui'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { formatCurrency, formatDate, getInitials } from '@/lib/utils'
+import { useAuthStore } from '@/store/auth'
 import type { CurrencyCode } from '@/types'
 
 export default function InvoiceDetailPage() {
@@ -14,6 +15,7 @@ export default function InvoiceDetailPage() {
   const sendInvoice = useSendInvoice(id!)
   const deleteInvoice = useDeleteInvoice()
   const recordPayment = useRecordPayment()
+  const user = useAuthStore((s) => s.user)
 
   const [payModal, setPayModal] = useState(false)
   const [payAmount, setPayAmount] = useState('')
@@ -101,12 +103,12 @@ export default function InvoiceDetailPage() {
         </div>
 
         {/* Invoice card (screen view) */}
-        <InvoiceContent invoice={invoice} />
+        <InvoiceContent invoice={invoice} user={user} />
       </div>
 
       {/* ── Print-only: bare invoice with no chrome ───────────────────────── */}
       <div className="hidden print:block">
-        <InvoiceContent invoice={invoice} />
+        <InvoiceContent invoice={invoice} user={user} />
       </div>
 
       {/* Record Payment Modal */}
@@ -151,7 +153,10 @@ export default function InvoiceDetailPage() {
 }
 
 // ── Shared invoice content (screen + print) ───────────────────────────────────
-function InvoiceContent({ invoice }: { invoice: ReturnType<typeof useInvoice>['data'] & object }) {
+function InvoiceContent({ invoice, user }: {
+  invoice: ReturnType<typeof useInvoice>['data'] & object
+  user: ReturnType<typeof useAuthStore>['user']
+}) {
   return (
     <Card className="print:shadow-none print:border-none print:rounded-none">
       <div className="p-6 sm:p-8">
@@ -179,8 +184,14 @@ function InvoiceContent({ invoice }: { invoice: ReturnType<typeof useInvoice>['d
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10">
           <div>
             <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">From</p>
-            <p className="font-semibold text-brand-900">Your Business</p>
-            <p className="text-sm text-slate-500">your@email.com</p>
+            <p className="font-semibold text-brand-900">{user?.businessName ?? user?.name ?? 'Your Business'}</p>
+            <p className="text-sm text-slate-500">{user?.email}</p>
+            {user?.address && (
+              <p className="text-sm text-slate-400 mt-1">{user.address}</p>
+            )}
+            {user?.taxNumber && (
+              <p className="text-sm text-slate-400">VAT: {user.taxNumber}</p>
+            )}
           </div>
           {invoice.client && (
             <div>

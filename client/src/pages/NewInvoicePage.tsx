@@ -9,6 +9,7 @@ import { useCreateInvoice } from '@/api/invoices'
 import { useClients } from '@/api/clients'
 import { Button, Input, Textarea, Select, Card, PageHeader } from '@/components/ui'
 import { formatCurrency } from '@/lib/utils'
+import { useAuthStore } from '@/store/auth'
 import type { CurrencyCode } from '@/types'
 
 const lineItemSchema = z.object({
@@ -48,15 +49,21 @@ export default function NewInvoicePage() {
   const navigate = useNavigate()
   const createInvoice = useCreateInvoice()
   const { data: clients = [] } = useClients()
+  const user = useAuthStore((s) => s.user)
   const [watchItems, setWatchItems] = useState<FormData['lineItems']>([])
+
+  const defaultCurrency = (user?.currency ?? 'ZAR') as CurrencyCode
+  const defaultTerm = user?.defaultPaymentTerm ?? 'net_30'
+  const defaultNotes = user?.defaultNotes ?? ''
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       issueDate: today,
       dueDate: in30,
-      paymentTerm: 'net_30',
-      currency: 'USD',
+      paymentTerm: defaultTerm as FormData['paymentTerm'],
+      currency: defaultCurrency,
+      notes: defaultNotes,
       lineItems: [{ description: '', quantity: 1, unitPrice: 0, taxRate: 0, discount: 0 }],
     },
   })

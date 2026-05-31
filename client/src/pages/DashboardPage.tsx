@@ -10,6 +10,8 @@ import { StatusBadge } from '@/components/ui/StatusBadge'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { useAuthStore } from '@/store/auth'
 
+import type { CurrencyCode } from '@/types'
+
 export default function DashboardPage() {
   const navigate = useNavigate()
   const user = useAuthStore((s) => s.user)
@@ -19,6 +21,7 @@ export default function DashboardPage() {
   const recentInvoices = invoices?.slice(0, 5) ?? []
   const hour = new Date().getHours()
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  const userCurrency = (user?.currency ?? 'ZAR') as CurrencyCode
 
   return (
     <div className="p-4 sm:p-8">
@@ -38,18 +41,18 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard
           label="Total Revenue"
-          value={isLoading ? '—' : formatCurrency(stats?.totalRevenue ?? 0)}
+          value={isLoading ? '—' : formatCurrency(stats?.totalRevenue ?? 0, userCurrency)}
           sub={`${stats?.paidCount ?? 0} paid invoices`}
           accent
         />
         <StatCard
           label="Outstanding"
-          value={isLoading ? '—' : formatCurrency(stats?.outstandingAmount ?? 0)}
+          value={isLoading ? '—' : formatCurrency(stats?.outstandingAmount ?? 0, userCurrency)}
           sub="Awaiting payment"
         />
         <StatCard
           label="Overdue"
-          value={isLoading ? '—' : formatCurrency(stats?.overdueAmount ?? 0)}
+          value={isLoading ? '—' : formatCurrency(stats?.overdueAmount ?? 0, userCurrency)}
           sub={`${stats?.overdueCount ?? 0} invoices`}
         />
         <StatCard
@@ -79,7 +82,7 @@ export default function DashboardPage() {
                 <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94a3b8' }} />
                 <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} />
                 <Tooltip
-                  formatter={(v: number) => formatCurrency(v)}
+                  formatter={(v: number) => formatCurrency(v, userCurrency)}
                   contentStyle={{ borderRadius: 8, border: '1px solid #e2e8f0', fontSize: 12 }}
                 />
                 <Area type="monotone" dataKey="revenue" stroke="#0f172a" strokeWidth={2}
