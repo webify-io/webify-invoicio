@@ -1,3 +1,4 @@
+import type { ApiError } from '../types'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, Search, Users } from 'lucide-react'
@@ -122,7 +123,7 @@ export default function ClientsPage() {
             </div>
           </div>
           {createClient.error && (
-            <p className="text-sm text-red-500">{(createClient.error as any)?.message ?? 'Failed to create client'}</p>
+            <p className="text-sm text-red-500">{(createClient.error as ApiError)?.message ?? 'Failed to create client'}</p>
           )}
           <div className="flex gap-3 pt-1">
             <Button variant="secondary" type="button" className="flex-1" onClick={() => setModal(false)}>Cancel</Button>

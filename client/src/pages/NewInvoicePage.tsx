@@ -1,3 +1,4 @@
+import type { ApiError } from '../types'
 import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
@@ -227,7 +228,7 @@ export default function NewInvoicePage() {
 
         {createInvoice.error && (
           <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
-            {(createInvoice.error as any)?.message ?? 'Failed to create invoice'}
+            {(createInvoice.error as ApiError)?.message ?? 'Failed to create invoice'}
           </p>
         )}
 

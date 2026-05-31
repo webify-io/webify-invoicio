@@ -6,12 +6,12 @@ A clean, full-stack invoicing application for freelancers and small businesses.
 
 ## Tech Stack
 
-| Layer     | Technology                                      |
-|-----------|-------------------------------------------------|
-| Frontend  | React 18 · Vite · Tailwind CSS v4               |
-| Backend   | Node.js · Express (ESM)                         |
-| Database  | Neon (serverless Postgres) · Drizzle ORM        |
-| Auth      | JWT (Bearer token via Axios interceptor)        |
+| Layer    | Technology                               |
+| -------- | ---------------------------------------- |
+| Frontend | React 18 · Vite · Tailwind CSS v4        |
+| Backend  | Node.js · Express (ESM)                  |
+| Database | Neon (serverless Postgres) · Drizzle ORM |
+| Auth     | JWT (Bearer token via Axios interceptor) |
 
 ---
 
@@ -33,11 +33,11 @@ invoicio/
 │       │   │   ├── dashboard.paths.js
 │       │   │   ├── invoices.paths.js
 │       │   │   └── payments.paths.js
-│       │   ├── auth.service.js
-│       │   ├── clients.service.js
-│       │   ├── dashboard.service.js
-│       │   ├── invoices.service.js
-│       │   └── payments.service.js
+│       │   ├── auth.service.ts
+│       │   ├── clients.service.ts
+│       │   ├── dashboard.service.ts
+│       │   ├── invoices.service.ts
+│       │   └── payments.service.ts
 │       ├── store/                  # Zustand auth store
 │       └── types/
 └── server/
@@ -94,32 +94,34 @@ cd client && npm run dev       # → http://localhost:5173
 
 ## API
 
-| Method | Route | Auth | Description |
-|--------|-------|------|-------------|
-| GET | `/api/health` | — | Health check |
-| POST | `/api/auth/register` | — | Register |
-| POST | `/api/auth/login` | — | Login → JWT |
-| GET | `/api/invoices` | ✓ | List invoices |
-| POST | `/api/invoices` | ✓ | Create invoice |
-| GET | `/api/invoices/:id` | ✓ | Invoice detail |
-| PATCH | `/api/invoices/:id` | ✓ | Update invoice |
-| POST | `/api/invoices/:id/send` | ✓ | Send invoice |
-| DELETE | `/api/invoices/:id` | ✓ | Delete draft |
-| GET | `/api/clients` | ✓ | List clients |
-| POST | `/api/clients` | ✓ | Create client |
-| GET | `/api/clients/:id` | ✓ | Client + invoices |
-| PATCH | `/api/clients/:id` | ✓ | Update client |
-| DELETE | `/api/clients/:id` | ✓ | Delete client |
-| POST | `/api/payments` | ✓ | Record payment |
-| GET | `/api/dashboard` | ✓ | Revenue stats |
+| Method | Route                    | Auth | Description       |
+| ------ | ------------------------ | ---- | ----------------- |
+| GET    | `/api/health`            | —    | Health check      |
+| POST   | `/api/auth/register`     | —    | Register          |
+| POST   | `/api/auth/login`        | —    | Login → JWT       |
+| GET    | `/api/invoices`          | ✓    | List invoices     |
+| POST   | `/api/invoices`          | ✓    | Create invoice    |
+| GET    | `/api/invoices/:id`      | ✓    | Invoice detail    |
+| PATCH  | `/api/invoices/:id`      | ✓    | Update invoice    |
+| POST   | `/api/invoices/:id/send` | ✓    | Send invoice      |
+| DELETE | `/api/invoices/:id`      | ✓    | Delete draft      |
+| GET    | `/api/clients`           | ✓    | List clients      |
+| POST   | `/api/clients`           | ✓    | Create client     |
+| GET    | `/api/clients/:id`       | ✓    | Client + invoices |
+| PATCH  | `/api/clients/:id`       | ✓    | Update client     |
+| DELETE | `/api/clients/:id`       | ✓    | Delete client     |
+| POST   | `/api/payments`          | ✓    | Record payment    |
+| GET    | `/api/dashboard`         | ✓    | Revenue stats     |
 
 ---
 
 ## Deployment
 
 ### Frontend → Vercel
+
 Set root to `client/`, framework to Vite, env var: `VITE_BACKEND_URL=https://api.yourdomain.co.za`
 
 ### Backend → Railway / Render
+
 Env vars: `DATABASE_URL`, `JWT_SECRET`, `CLIENT_URL`, `PORT=4000`
 Start: `npm start`

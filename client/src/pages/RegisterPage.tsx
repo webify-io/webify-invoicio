@@ -1,3 +1,4 @@
+import type { ApiError } from '../types'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -48,7 +49,7 @@ export default function RegisterPage() {
 
           {register_.error && (
             <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
-              {(register_.error as any)?.message ?? 'Registration failed'}
+              {(register_.error as ApiError)?.message ?? 'Registration failed'}
             </p>
           )}
 

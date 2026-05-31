@@ -1,33 +1,34 @@
+// Auth mutation hooks.
+// setAuth() in the store handles localStorage.setItem internally —
+// no need to call it separately here (was a bug: it was being set twice).
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { authService } from '../services/auth.service.js'
+import { authService } from '../services/auth.service'
 import { useAuthStore } from '../store/auth'
-
-interface LoginInput { email: string; password: string }
-interface RegisterInput { email: string; password: string; name: string; businessName?: string }
+import type { LoginInput, RegisterInput } from '../types'
 
 export function useLogin() {
-  const setAuth = useAuthStore((s) => s.setAuth)
+  const setAuth  = useAuthStore((s) => s.setAuth)
   const navigate = useNavigate()
+
   return useMutation({
     mutationFn: (data: LoginInput) => authService.login(data),
-    onSuccess: (res: any) => {
-      // axiosClient unwraps response.data, so res is the full response body: { data: { token, user } }
-      const { token, user } = res.data
-      setAuth(token, user) // setAuth handles localStorage.setItem internally — no need to call it twice
+    onSuccess: (res) => {
+      // res is ApiResponse<AuthResponse> — server wraps payload in { data: ... }
+      setAuth(res.data.token, res.data.user)
       navigate('/')
     },
   })
 }
 
 export function useRegister() {
-  const setAuth = useAuthStore((s) => s.setAuth)
+  const setAuth  = useAuthStore((s) => s.setAuth)
   const navigate = useNavigate()
+
   return useMutation({
     mutationFn: (data: RegisterInput) => authService.register(data),
-    onSuccess: (res: any) => {
-      const { token, user } = res.data
-      setAuth(token, user)
+    onSuccess: (res) => {
+      setAuth(res.data.token, res.data.user)
       navigate('/')
     },
   })
